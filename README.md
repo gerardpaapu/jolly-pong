@@ -1,7 +1,3 @@
-How to use this template
+# Jolly Pong
 
-1. clone it
-2. delete `.git`
-3. Add `name`, `description`, `author` to the package.json
-4. `git init`
-5. live your life
+An object-algebra-esque approach to typescript schemas, i.e. value-level type-definition.
