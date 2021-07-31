@@ -6,6 +6,10 @@ import type { ISchemaAlgebra } from './schema';
 const wizardMagic = null as any;
 
 const toValue: ISchemaAlgebra<TIdSymbol> = {
+  literal: () => wizardMagic,
+  null: () => wizardMagic,
+  undefined: () => wizardMagic,
+  boolean: () => wizardMagic,
   string: () => wizardMagic,
   number: () => wizardMagic,
   array: () => wizardMagic,

@@ -7,8 +7,12 @@ export type TApply<TSymbol, T> = TSymbol extends TPredicateSymbol
   : never;
 
 export interface ISchemaAlgebra<S> {
+  null(): TApply<S, null>;
+  undefined(): TApply<S, undefined>;
+  boolean(): TApply<S, boolean>;
   string(): TApply<S, string>;
   number(): TApply<S, number>;
+  literal<T extends string | number | true | false>(v: T): TApply<S, T>;
   array<TArg>(t: TApply<S, TArg>): TApply<S, TArg[]>;
   object<R extends Record<string, TApply<S, any>>>(
     record: R
@@ -22,17 +26,14 @@ type TRecordSchema<S, R extends Record<string, TApply<S, any>>> = {
 
 type TAnySchema<S, T extends TApply<S, any>[]> = {
   0: never;
-  1: ((...args: T) => any) extends (
-    first: infer Head,
-    ...rest: infer Tail
-  ) => any
+  1: T extends [infer Head, ...infer Tail]
     ? Head extends TApply<S, infer U>
       ? Tail extends TApply<S, any>[]
         ? U | TAnySchema<S, Tail>
         : never
       : never
     : never;
-}[T extends [] ? 0 : 1];
+}[T extends [any, ...any[]] ? 1 : 0];
 
 export type TSchema<T> = <S>(alg: ISchemaAlgebra<S>) => TApply<S, T>;
 

@@ -2,10 +2,31 @@ import type { ISchemaAlgebra } from './schema';
 import type { TPredicateSymbol } from './symbols';
 
 const check: ISchemaAlgebra<TPredicateSymbol> = {
+  literal:
+    <T extends string | number | true | false>(v: T) =>
+    (x: unknown): x is T =>
+      x === v,
+
+  null:
+    () =>
+    (x): x is null =>
+      x === null,
+
+  undefined:
+    () =>
+    (x): x is undefined =>
+      x === undefined,
+
+  boolean:
+    () =>
+    (x): x is boolean =>
+      typeof x === 'boolean',
+
   string:
     () =>
     (x): x is string =>
       typeof x === 'string',
+
   number:
     () =>
     (x): x is number =>
