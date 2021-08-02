@@ -1,9 +1,4 @@
-# Jolly Pong
-
-An object-algebra-esque approach to typescript schemas, i.e. value-level type-definition.
-
-```typescript
-import * as J from 'jolly-pong';
+import * as J from '.';
 
 const schema = <T>(alg: J.ISchemaAlgebra<T>) =>
   alg.object({
@@ -13,5 +8,4 @@ const schema = <T>(alg: J.ISchemaAlgebra<T>) =>
 
 const example = schema(J.toValue);
 export type Example = typeof example;
-export const isExample = schema(J.check);
-```
+export const isExample = schema(J.check) as (x: unknown) => x is Example;

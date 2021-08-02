@@ -1,3 +1,3 @@
-export { ISchemaAlgebra, ISchema } from './schema';
+export { ISchemaAlgebra, TSchema, TUnSchema } from './schema';
 export { default as check } from './check';
-export { default as toValue } from './id';
+export { default as toValue } from './toValue';
