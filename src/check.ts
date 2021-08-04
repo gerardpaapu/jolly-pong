@@ -1,7 +1,7 @@
 import type { ISchemaAlgebra } from './schema';
-import type { TPredicateSymbol } from './symbols';
+import type * as Predicate from './predicate';
 
-const check: ISchemaAlgebra<TPredicateSymbol> = {
+const check: ISchemaAlgebra<Predicate.URI> = {
   literal:
     <T extends string | number | true | false>(v: T) =>
     (x: unknown): x is T =>
