@@ -1,4 +1,5 @@
-import { ISchemaAlgebra, Kinds } from './schema';
+import { ISchemaAlgebra } from './schema';
+import { URIs } from './hkt';
 import toValue from './toValue';
 
 type T = {
@@ -10,7 +11,7 @@ type T = {
 
 describe('toValue', () => {
   it('produces a value of the type', () => {
-    const schema = <S extends Kinds>(s: ISchemaAlgebra<S>) =>
+    const schema = <S extends URIs>(s: ISchemaAlgebra<S>) =>
       s.object({
         foo: s.number(),
         bar: s.array(s.string()),

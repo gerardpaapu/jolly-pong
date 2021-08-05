@@ -1,12 +1,15 @@
 import * as J from '.';
 
-const schema = <T extends J.Kinds>(alg: J.ISchemaAlgebra<T>) =>
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+const schema = <T extends J.URIs>(alg: J.ISchemaAlgebra<T>) =>
   alg.object({
     foo: alg.array(alg.anyOf(alg.number(), alg.string())),
     bar: alg.literal(7),
   });
 
-const example = schema(J.toValue);
-export type Example = typeof example;
+export type Example = J.TUnSchema<typeof schema>;
 export const isExample = schema(J.check);
+
+export const example: Example = {
+  foo: ['poop', 4],
+  bar: 7,
+};

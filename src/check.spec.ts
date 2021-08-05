@@ -1,4 +1,5 @@
-import { TSchema, ISchemaAlgebra, Kinds } from './schema';
+import { TSchema, ISchemaAlgebra } from './schema';
+import { URIs } from './hkt';
 import check from './check';
 
 const run = <TArg, TReturn>(arg: TArg, f: (_: TArg) => TReturn): TReturn =>
@@ -86,7 +87,7 @@ describe('Checking arrays', () => {
 });
 
 describe('checking objects', () => {
-  const objectS = <S extends Kinds>(s: ISchemaAlgebra<S>) =>
+  const objectS = <S extends URIs>(s: ISchemaAlgebra<S>) =>
     s.object({
       foo: s.number(),
       bar: s.string(),
@@ -119,7 +120,7 @@ describe('checking objects', () => {
 });
 
 describe('anyOf', () => {
-  const schema = <S extends Kinds>(s: ISchemaAlgebra<S>) =>
+  const schema = <S extends URIs>(s: ISchemaAlgebra<S>) =>
     s.anyOf(s.number(), s.string(), s.null());
 
   it('accepts any members of the union', () => {
